@@ -37,19 +37,21 @@ public class App {
 
     public static void IsAnagram() {
         Scanner scanner = new Scanner(System.in);
-        String str1 = scanner.nextLine().toLowerCase();
-        String str2 = scanner.nextLine().toLowerCase();
+        String str1 = scanner.nextLine();
+        String str2 = scanner.nextLine();
         if (str1.length() != str2.length()) {
-            System.out.println(str1 + str2 + "are not the same length.");
+            System.out.println(str1 + "and " + str2 + " are not the same length.");
         }
-        char[] a1 = str1.toCharArray();
-        char[] a2 = str2.toCharArray();
+        String lowerstr1 = str1.toLowerCase();
+        String lowerstr2 = str2.toLowerCase();
+        char[] a1 = lowerstr1.toCharArray();
+        char[] a2 = lowerstr2.toCharArray();
         Arrays.sort(a1);
         Arrays.sort(a2);
         if (Arrays.equals(a1,a2)) {
-            System.out.println(str2 + "is an anagram of " + str1);
+            System.out.println(str2 + " is an anagram of " + str1);
         } else {
-            System.out.println(str2 + "is not an anagram of " + str1);
+            System.out.println(str2 + " is not an anagram of " + str1);
         }
         scanner.close();
     }
