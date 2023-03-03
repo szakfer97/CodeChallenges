@@ -3,7 +3,6 @@ import java.util.*;
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("In this app I solve some code challenges");
-        PlusOne();
     }
 
     public static void FizzBuzz() {
