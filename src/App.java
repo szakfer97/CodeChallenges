@@ -3,6 +3,7 @@ import java.util.*;
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("In this app I solve some code challenges");
+        PlusOne();
     }
 
     public static void FizzBuzz() {
@@ -108,13 +109,13 @@ public class App {
         for (int i = n - 1; i >= 0; i--) {
             if (digits[i] < 9) {
                 digits[i]++; 
-                System.out.println(Arrays.toString(digits));
+                System.out.println("New array is: " + Arrays.toString(digits));
             }
             digits[i] = 0;
         }
         int[] newNumber = new int[n + 1];
         newNumber[0] = 1;
-        System.out.println(Arrays.toString(newNumber));
+        System.out.println("New array is: " + Arrays.toString(newNumber));
         scanner.close();
     }
 }
