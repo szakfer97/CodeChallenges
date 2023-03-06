@@ -97,17 +97,36 @@ public class App {
         scanner.close();
     }
 
+    public static void MissingNumber() {
+        Scanner scanner = new Scanner(System.in);
+        int element1 = Integer.parseInt(scanner.nextLine());
+        int element2 = Integer.parseInt(scanner.nextLine());
+        int element3 = Integer.parseInt(scanner.nextLine());
+        int element4 = Integer.parseInt(scanner.nextLine());
+        int element5 = Integer.parseInt(scanner.nextLine());
+        int[] arr = { element1, element2, element3, element4, element5 };
+        int nr = arr.length + 1;
+        int sum = nr * (nr + 1) / 2;
+        int restSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            restSum += arr[i];
+        }
+        int missingNr = sum - restSum;
+        System.out.println("The missing number from the array is: " + missingNr);
+        scanner.close();
+    }
+
     public static void PlusOne() {
         Scanner scanner = new Scanner(System.in);
         int digit1 = Integer.parseInt(scanner.nextLine());
         int digit2 = Integer.parseInt(scanner.nextLine());
         int digit3 = Integer.parseInt(scanner.nextLine());
         int digit4 = Integer.parseInt(scanner.nextLine());
-        int [] digits = {digit1, digit2, digit3, digit4};   
+        int[] digits = { digit1, digit2, digit3, digit4 };
         int n = digits.length;
         for (int i = n - 1; i >= 0; i--) {
             if (digits[i] < 9) {
-                digits[i]++; 
+                digits[i]++;
                 System.out.println("New array is: " + Arrays.toString(digits));
             }
             digits[i] = 0;
