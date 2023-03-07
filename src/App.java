@@ -24,6 +24,7 @@ public class App {
     public static void IsPalindrome() {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
+        scanner.close();
         String reverseStr = "";
         for (int i = (str.length() - 1); i >= 0; --i) {
             reverseStr = reverseStr + str.charAt(i);
@@ -33,13 +34,13 @@ public class App {
         } else {
             System.out.println(str + " is not a Palindrome String.");
         }
-        scanner.close();
     }
 
     public static void IsAnagram() {
         Scanner scanner = new Scanner(System.in);
         String str1 = scanner.nextLine();
         String str2 = scanner.nextLine();
+        scanner.close();
         if (str1.length() != str2.length()) {
             System.out.println(str1 + "and " + str2 + " are not the same length.");
         }
@@ -54,13 +55,46 @@ public class App {
         } else {
             System.out.println(str2 + " is not an anagram of " + str1);
         }
+    }
+
+    public static void ValidParentheses() {
+        Stack<Character> s = new Stack<Character>();
+        Scanner scanner = new Scanner(System.in);
+        String inputStr = scanner.nextLine();
         scanner.close();
+        for (char st : inputStr.toCharArray()) {
+            if (st == '(' || st == '{' || st == '[') {
+                s.push(st);
+            } else {
+                if (s.empty()) {
+                    System.out.println(inputStr + " contains invalid parentheses.");
+                    return;
+                } else {
+                    char top = (Character) s.peek();
+                    if (st == ')' && top == '(' ||
+                            st == '}' && top == '{' ||
+                            st == ']' && top == '[') {
+                        s.pop();
+                    } else {
+                        System.out.println(inputStr + " contains invalid parentheses.");
+                        return;
+                    }
+                }
+            }
+        }
+        if (s.empty()) {
+            System.out.println(inputStr + " contains valid parentheses.");
+        } else {
+            System.out.println(inputStr +
+                    " contains invalid parentheses.");
+        }
     }
 
     public static void RomanToInt() {
         Map<Character, Integer> map = new HashMap<Character, Integer>();
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine().toUpperCase();
+        scanner.close();
         map.put('I', 1);
         map.put('V', 5);
         map.put('X', 10);
@@ -79,13 +113,13 @@ public class App {
             number += (map.get(str.charAt(i)));
         }
         System.out.println("Its int value is: " + number);
-        scanner.close();
     }
 
     public static void ReverseBits() {
         int rev = 0;
         Scanner scanner = new Scanner(System.in);
         int nr = Integer.parseInt(scanner.nextLine());
+        scanner.close();
         while (nr > 0) {
             rev <<= 1;
             if ((int) (nr & 1) == 1) {
@@ -94,7 +128,6 @@ public class App {
             nr >>= 1;
         }
         System.out.println("Number after reversing bits is: " + rev);
-        scanner.close();
     }
 
     public static void MissingNumber() {
@@ -105,6 +138,7 @@ public class App {
         int element4 = Integer.parseInt(scanner.nextLine());
         int element5 = Integer.parseInt(scanner.nextLine());
         int[] arr = { element1, element2, element3, element4, element5 };
+        scanner.close();
         int nr = arr.length + 1;
         int sum = nr * (nr + 1) / 2;
         int restSum = 0;
@@ -113,7 +147,6 @@ public class App {
         }
         int missingNr = sum - restSum;
         System.out.println("The missing number from the array is: " + missingNr);
-        scanner.close();
     }
 
     public static void PlusOne() {
@@ -122,6 +155,7 @@ public class App {
         int digit2 = Integer.parseInt(scanner.nextLine());
         int digit3 = Integer.parseInt(scanner.nextLine());
         int digit4 = Integer.parseInt(scanner.nextLine());
+        scanner.close();
         int[] digits = { digit1, digit2, digit3, digit4 };
         int n = digits.length;
         for (int i = n - 1; i >= 0; i--) {
@@ -134,6 +168,5 @@ public class App {
         int[] newNumber = new int[n + 1];
         newNumber[0] = 1;
         System.out.println("New array is: " + Arrays.toString(newNumber));
-        scanner.close();
     }
 }
