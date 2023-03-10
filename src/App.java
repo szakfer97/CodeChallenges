@@ -169,4 +169,21 @@ public class App {
         newNumber[0] = 1;
         System.out.println("New array is: " + Arrays.toString(newNumber));
     }
+
+    public static void FibonacciSequence() {
+        Scanner scanner = new Scanner(System.in);
+        int count = Integer.parseInt(scanner.nextLine());
+        scanner.close();
+        int nr1 = 0; 
+        int nr2 = 1;
+        System.out.println(nr1);
+        System.out.println(nr2);
+        for (int i = 2; i < count; i++)
+        {
+            int nr3 = nr1 + nr2;
+            System.out.println(nr3);
+            nr1 = nr2;
+            nr2 = nr3;
+        }
+    }
 }
