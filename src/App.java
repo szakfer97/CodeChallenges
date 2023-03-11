@@ -186,4 +186,21 @@ public class App {
             nr2 = nr3;
         }
     }
+
+    public static void PascalTriangle() {
+        Scanner scanner = new Scanner(System.in);
+        int nr = Integer.parseInt(scanner.nextLine());
+        scanner.close();
+        for (int line = 1; line <= nr; line++) {
+            for (int j = 0; j <= nr - line; j++) {
+                System.out.print("" + " ");
+            }
+            int cons = 1;
+            for (int i = 1; i <= line; i++) {
+                System.out.print(cons + " ");
+                cons = cons * (line - i) / i;
+            }
+            System.out.println();
+        }
+    }
 }
