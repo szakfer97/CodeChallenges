@@ -85,8 +85,7 @@ public class App {
         if (s.empty()) {
             System.out.println(inputStr + " contains valid parentheses.");
         } else {
-            System.out.println(inputStr +
-                    " contains invalid parentheses.");
+            System.out.println(inputStr + " contains invalid parentheses.");
         }
     }
 
@@ -118,7 +117,7 @@ public class App {
     public static void ReverseBits() {
         int rev = 0;
         Scanner scanner = new Scanner(System.in);
-        int nr = Integer.parseInt(scanner.nextLine());
+        int nr = scanner.nextInt();
         scanner.close();
         while (nr > 0) {
             rev <<= 1;
@@ -132,12 +131,13 @@ public class App {
 
     public static void MissingNumber() {
         Scanner scanner = new Scanner(System.in);
-        int element1 = Integer.parseInt(scanner.nextLine());
-        int element2 = Integer.parseInt(scanner.nextLine());
-        int element3 = Integer.parseInt(scanner.nextLine());
-        int element4 = Integer.parseInt(scanner.nextLine());
-        int element5 = Integer.parseInt(scanner.nextLine());
-        int[] arr = { element1, element2, element3, element4, element5 };
+        System.out.print("Enter the size of the array:" + " ");
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter the elements of the array:" + " ");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
         scanner.close();
         int nr = arr.length + 1;
         int sum = nr * (nr + 1) / 2;
@@ -151,12 +151,14 @@ public class App {
 
     public static void PlusOne() {
         Scanner scanner = new Scanner(System.in);
-        int digit1 = Integer.parseInt(scanner.nextLine());
-        int digit2 = Integer.parseInt(scanner.nextLine());
-        int digit3 = Integer.parseInt(scanner.nextLine());
-        int digit4 = Integer.parseInt(scanner.nextLine());
+        System.out.print("Enter the size of the array:" + " ");
+        int nr = scanner.nextInt();
+        int[] digits = new int[nr];
+        System.out.println("Enter the elements of the array:" + " ");
+        for (int i = 0; i < nr; i++) {
+            digits[i] = scanner.nextInt();
+        }
         scanner.close();
-        int[] digits = { digit1, digit2, digit3, digit4 };
         int n = digits.length;
         for (int i = n - 1; i >= 0; i--) {
             if (digits[i] < 9) {
@@ -172,24 +174,27 @@ public class App {
 
     public static void FibonacciSequence() {
         Scanner scanner = new Scanner(System.in);
-        int count = Integer.parseInt(scanner.nextLine());
+        System.out.println("Enter the number of elements you want displayed:" + " ");
+        int count = scanner.nextInt();
         scanner.close();
-        int nr1 = 0; 
-        int nr2 = 1;
-        System.out.println(nr1);
-        System.out.println(nr2);
-        for (int i = 2; i < count; i++)
-        {
-            int nr3 = nr1 + nr2;
-            System.out.println(nr3);
-            nr1 = nr2;
-            nr2 = nr3;
+        fibonacciSequence(count);
+    }
+
+    public static void fibonacciSequence(int n) {
+        int[] fibonacci = new int[n];
+        fibonacci[0] = 0;
+        fibonacci[1] = 1;
+        for (int i = 2; i < n; i++) {
+            fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+        }
+        for (int i = 0; i < n; i++) {
+            System.out.print(fibonacci[i] + " ");
         }
     }
 
     public static void PascalTriangle() {
         Scanner scanner = new Scanner(System.in);
-        int nr = Integer.parseInt(scanner.nextLine());
+        int nr = scanner.nextInt();
         scanner.close();
         for (int line = 1; line <= nr; line++) {
             for (int j = 0; j <= nr - line; j++) {
@@ -202,5 +207,42 @@ public class App {
             }
             System.out.println();
         }
+    }
+
+    public static void BinarySearch() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the size of the array:" + " ");
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter the elements of the array:" + " ");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+        System.out.println("Enter the key:" + " ");
+        int key = scanner.nextInt();
+        scanner.close();
+        int index = binarySearch(arr, key);
+        if (index != -1) {
+            System.out.println("Key found at index " + index);
+        } else {
+            System.out.println("Key" + key + "not found in the array");
+        }
+    }
+
+    private static int binarySearch(int[] arr, int key) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == key) {
+                return mid;
+            } else if (arr[mid] < key) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
     }
 }
