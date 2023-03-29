@@ -245,4 +245,21 @@ public class App {
         }
         return -1;
     }
+
+    public static void HanoiTower() {
+        Scanner scanner = new Scanner(System.in);
+        int disknr = scanner.nextInt();
+        scanner.close();
+        solveHanoiTower(disknr, "A", "B", "C");
+    }
+
+    private static void solveHanoiTower(int disknr, String start, String mid, String end) {
+        if (disknr == 1) {
+            System.out.println("Move disk 1 from " + start + " to " + end);
+            return;
+        }
+        solveHanoiTower(disknr - 1, start, end, mid);
+        System.out.println("Move disk " + disknr + " from " + start + " to " + end);
+        solveHanoiTower(disknr - 1, mid, start, end);
+    }
 }
