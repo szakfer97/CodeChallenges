@@ -256,10 +256,55 @@ public class App {
     private static void solveHanoiTower(int disknr, String start, String mid, String end) {
         if (disknr == 1) {
             System.out.println("Move disk 1 from " + start + " to " + end);
-            return;
         }
         solveHanoiTower(disknr - 1, start, end, mid);
         System.out.println("Move disk " + disknr + " from " + start + " to " + end);
         solveHanoiTower(disknr - 1, mid, start, end);
+    }
+
+    public static void GasStation() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the size of the gas array:" + " ");
+        int m = scanner.nextInt();
+        int[] gas = new int[m];
+        System.out.println("Enter the elements of the array:" + " ");
+        for (int i = 0; i < m; i++) {
+            gas[i] = scanner.nextInt();
+        }
+        System.out.print("Enter the size of the cost array:" + " ");
+        int n = scanner.nextInt();
+        int[] cost = new int[n];
+        System.out.println("Enter the elements of the array:" + " ");
+        for (int i = 0; i < n; i++) {
+            cost[i] = scanner.nextInt();
+        }
+        scanner.close();
+        int start = completeCircuit(gas, cost);
+        if (start != -1) {
+            System.out.println("Starting here: " + start + "we did the circuit");
+        } else {
+            System.out.println("We couldn't make it" + " ");
+        }
+    }
+
+    private static int completeCircuit(int[] gas, int[] cost) {
+        int n = gas.length;
+        int start = 0;
+        int totalGas = 0;
+        int totalCost = 0;
+        int tank = 0;
+        for (int i = 0; i < n; i++) {
+            totalGas += gas[i];
+            totalCost += cost[i];
+            tank += gas[i] - cost[i];
+            if (tank < 0) {
+                start = i + 1;
+                tank = 0;
+            }
+        }
+        if (totalGas < totalCost) {
+            return -1;
+        }
+        return start;
     }
 }
