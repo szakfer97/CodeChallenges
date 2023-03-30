@@ -3,6 +3,7 @@ import java.util.*;
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("In this app I solve some code challenges");
+        GasStation();
     }
 
     public static void FizzBuzz() {
@@ -281,7 +282,7 @@ public class App {
         scanner.close();
         int start = completeCircuit(gas, cost);
         if (start != -1) {
-            System.out.println("Starting here: " + start + "we did the circuit");
+            System.out.println("Starting here: " + start + " we did the circuit");
         } else {
             System.out.println("We couldn't make it" + " ");
         }
