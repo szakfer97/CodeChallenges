@@ -2,7 +2,7 @@ import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("In this app I solve some code challenges");
+        System.out.println("Hi, " + "in this app I solve some code challenges");
     }
 
     public static void FizzBuzz() {
@@ -45,7 +45,6 @@ public class App {
         } else {
             System.out.println("The word is not almost a palindrome" + ".");
         }
-
         scanner.close();
     }
 
