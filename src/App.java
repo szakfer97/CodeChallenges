@@ -36,6 +36,33 @@ public class App {
         }
     }
 
+    public static void AlmostPalindrome() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a word:" + " ");
+        String word = scanner.nextLine();
+        if (isAlmostPalindrome(word)) {
+            System.out.println("The word is almost a palindrome" + ".");
+        } else {
+            System.out.println("The word is not almost a palindrome" + ".");
+        }
+
+        scanner.close();
+    }
+
+    private static boolean isAlmostPalindrome(String word) {
+        int length = word.length();
+        int changesNeeded = 0;
+        for (int i = 0; i < length / 2; i++) {
+            if (word.charAt(i) != word.charAt(length - 1 - i)) {
+                changesNeeded++;
+                if (changesNeeded > 1) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static void IsAnagram() {
         Scanner scanner = new Scanner(System.in);
         String str1 = scanner.nextLine();
