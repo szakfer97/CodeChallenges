@@ -21,19 +21,25 @@ public class App {
         }
     }
 
-    public static void IsPalindrome() {
+    public static void PalindromeString() {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
         scanner.close();
-        String reverseStr = "";
-        for (int i = (str.length() - 1); i >= 0; --i) {
-            reverseStr = reverseStr + str.charAt(i);
+        System.out.println(str + " is "
+                + (isPalindrome(str.toLowerCase()) ? "" : "not ")
+                + "a Palindrome String.");
+    }
+
+    private static boolean isPalindrome(String str) {
+        int left = 0, right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
         }
-        if (str.toLowerCase().equals(reverseStr.toLowerCase())) {
-            System.out.println(str + " is a Palindrome String.");
-        } else {
-            System.out.println(str + " is not a Palindrome String.");
-        }
+        return true;
     }
 
     public static void AlmostPalindrome() {
@@ -64,23 +70,26 @@ public class App {
 
     public static void IsAnagram() {
         Scanner scanner = new Scanner(System.in);
-        String str1 = scanner.nextLine();
-        String str2 = scanner.nextLine();
+        String str1 = scanner.nextLine().toLowerCase();
+        String str2 = scanner.nextLine().toLowerCase();
         scanner.close();
         if (str1.length() != str2.length()) {
-            System.out.println(str1 + "and " + str2 + " are not the same length.");
+            System.out.println(str1 + " and " + str2 + " are not the same length.");
+            return;
         }
-        String lowerstr1 = str1.toLowerCase();
-        String lowerstr2 = str2.toLowerCase();
-        char[] a1 = lowerstr1.toCharArray();
-        char[] a2 = lowerstr2.toCharArray();
-        Arrays.sort(a1);
-        Arrays.sort(a2);
-        if (Arrays.equals(a1, a2)) {
-            System.out.println(str2 + " is an anagram of " + str1);
-        } else {
-            System.out.println(str2 + " is not an anagram of " + str1);
+        int[] count = new int[26];
+        for (int i = 0; i < str1.length(); i++) {
+            count[str1.charAt(i) - 'a']--;
+            count[str2.charAt(i) - 'a']++;
         }
+        boolean isAnagram = true;
+        for (int freq : count) {
+            if (freq != 0) {
+                isAnagram = false;
+                break;
+            }
+        }
+        System.out.println(str2 + " is " + (isAnagram ? "" : "not ") + "an anagram of " + str1);
     }
 
     public static void ValidParentheses() {
@@ -115,29 +124,18 @@ public class App {
         }
     }
 
-    public static void RomanToInt() {
-        Map<Character, Integer> map = new HashMap<Character, Integer>();
-        Scanner scanner = new Scanner(System.in);
-        String str = scanner.nextLine().toUpperCase();
-        scanner.close();
-        map.put('I', 1);
-        map.put('V', 5);
-        map.put('X', 10);
-        map.put('L', 50);
-        map.put('C', 100);
-        map.put('D', 500);
-        map.put('M', 1000);
-        str = str.replace("IV", "IIII");
-        str = str.replace("IX", "VIIII");
-        str = str.replace("XL", "XXXX");
-        str = str.replace("XC", "LXXXX");
-        str = str.replace("CD", "CCCC");
-        str = str.replace("CM", "DCCCC");
-        int number = 0;
-        for (int i = 0; i < str.length(); i++) {
-            number += (map.get(str.charAt(i)));
+    public static int RomanToInt(String s) {
+        int result = 0;
+        int[] values = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+        String[] symbols = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+
+        for (int i = 0; i < symbols.length; i++) {
+            while (s.startsWith(symbols[i])) {
+                result += values[i];
+                s = s.substring(symbols[i].length());
+            }
         }
-        System.out.println("Its int value is: " + number);
+        return result;
     }
 
     public static void ReverseBits() {
@@ -206,16 +204,22 @@ public class App {
         fibonacciSequence(count);
     }
 
-    public static void fibonacciSequence(int n) {
-        int[] fibonacci = new int[n];
+    private static void fibonacciSequence(int n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException("Input must be a positive non-zero value.");
+        }
+
+        long[] fibonacci = new long[n];
         fibonacci[0] = 0;
         fibonacci[1] = 1;
+
+        StringBuilder sequence = new StringBuilder();
         for (int i = 2; i < n; i++) {
             fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+            sequence.append(fibonacci[i]).append(" ");
         }
-        for (int i = 0; i < n; i++) {
-            System.out.print(fibonacci[i] + " ");
-        }
+
+        System.out.println(sequence.toString());
     }
 
     public static void PascalTriangle() {
@@ -273,10 +277,16 @@ public class App {
     }
 
     public static void HanoiTower() {
-        Scanner scanner = new Scanner(System.in);
-        int disknr = scanner.nextInt();
-        scanner.close();
+        int disknr = readHanoi("Enter the number of disks: ");
         solveHanoiTower(disknr, "A", "B", "C");
+    }
+
+    private static int readHanoi(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(prompt);
+        int result = scanner.nextInt();
+        scanner.close();
+        return result;
     }
 
     private static void solveHanoiTower(int disknr, String start, String mid, String end) {
